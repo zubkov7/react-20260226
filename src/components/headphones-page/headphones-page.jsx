@@ -5,12 +5,10 @@ export const HeadphonesPage = ({ title }) => {
   return (
     <div>
       <h1>{title}</h1>
-
       <ul>
         {headphones.map(({ name, brand, reviews, codecs, id }) => (
           <li key={id}>
             <Headphone
-              key={id}
               name={name}
               brand={brand}
               reviews={reviews}
