@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { headphones } from "../../constants/mock";
 import { Headphone } from "../headphone/headphone";
 import { Tab } from "../tab/tab";
 
 export const HeadphonesPage = ({ title }) => {
   const [activeHeadphoneId, setActiveHeadphoneId] = useState(headphones[0].id);
+  // const [activeHeadphoneId, setActiveHeadphoneId] = useState(() =>
+  //   headphones.find(),
+  // );
 
-  const activeHeadphone = headphones.find(({ id }) => id === activeHeadphoneId);
+  const activeHeadphone = useMemo(() => {
+    return headphones.find(({ id }) => id === activeHeadphoneId);
+  }, [activeHeadphoneId]);
 
   const handleSetActiveHeadphoneId = (id) => {
     if (activeHeadphoneId === id) {
@@ -30,6 +35,7 @@ export const HeadphonesPage = ({ title }) => {
       ))}
 
       <Headphone
+        key={activeHeadphoneId}
         name={activeHeadphone.name}
         brand={activeHeadphone.brand}
         reviews={activeHeadphone.reviews}
