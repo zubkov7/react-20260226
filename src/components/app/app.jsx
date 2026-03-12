@@ -3,7 +3,7 @@ import { Layout } from "../layout/layout";
 
 export const App = () => {
   return (
-    <Layout sidebar={<div>sidebard</div>}>
+    <Layout>
       <HeadphonesPage title='headphones app' />
     </Layout>
   );

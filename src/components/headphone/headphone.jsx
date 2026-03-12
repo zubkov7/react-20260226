@@ -4,7 +4,7 @@ import { Reviews } from "../reviews/reviews";
 
 export const Headphone = ({ name, brand, reviews, codecs }) => {
   if (!name) {
-    return null; // null, undefined, false/true
+    return null;
   }
 
   return (
@@ -12,7 +12,7 @@ export const Headphone = ({ name, brand, reviews, codecs }) => {
       <h2>{name}</h2>
       <h3>Brand</h3>
       <div>{brand}</div>
-      {reviews.length ? <Reviews reviews={reviews} /> : <div>no reviews</div>}
+      {Boolean(reviews.length) && <Reviews reviews={reviews} />}
       <Codecs codecs={codecs} />
       <Counter />
     </section>
