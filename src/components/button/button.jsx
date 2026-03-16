@@ -1,5 +1,7 @@
 import classNames from "classnames";
 import styles from "./button.module.css";
+import { useContext } from "react";
+import { ThemeContext } from "../theme-provider";
 
 export const Button = ({
   title,
@@ -7,15 +9,21 @@ export const Button = ({
   disabled,
   size = "500",
   className,
+  ref,
 }) => {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <button
       className={classNames(styles.root, className, {
         [styles.size500]: size === "500",
         [styles.size400]: size === "400",
+        [styles.light]: theme === "light",
+        [styles.dark]: theme === "dark",
       })}
       disabled={disabled}
       onClick={onClick}
+      ref={ref}
     >
       {title}
     </button>
