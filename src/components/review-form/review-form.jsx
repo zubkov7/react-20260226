@@ -1,74 +1,35 @@
-import { act, useReducer, useState } from "react";
+import { Button } from "../button/button";
+import { Counter } from "../counter/counter";
+import { useForm } from "./use-form";
 
-const INITIAL_FORM = {
-  name: "",
-  address: "",
-  text: "",
-};
+import styles from "./review-form.module.css";
 
-const SET_NAME_ACTION = "setNameAction";
-const SET_ADDRESS_ACTION = "setAddressAction";
-const SET_TEXT_ACTION = "setTextAction";
-const CLEAR_FORM_ACTION = "clearFormAction";
+export const ReviewForm = () => {
+  const { form, setText, incrementRating, decrementRating, clear } = useForm();
 
-// action = { type: string; payload: any }
-
-// dispatch(action);
-
-const reducer = (state, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
-    case SET_NAME_ACTION:
-      return { ...INITIAL_FORM, name: payload };
-    case SET_ADDRESS_ACTION:
-      return { ...state, address: payload };
-    case SET_TEXT_ACTION:
-      return { ...state, text: payload };
-    case CLEAR_FORM_ACTION:
-    default:
-      return INITIAL_FORM;
-  }
-};
-
-export const ReviewForm = (props) => {
-  const [form, dispatch] = useReducer(reducer, INITIAL_FORM);
-
-  const { name, address, text } = form;
-
-  //   const [name, setName] = useState("");
-  //   const [text, setText] = useState("");
-  //   const [address, setAddress] = useState("");
+  const { text, rating } = form;
 
   return (
-    <form>
-      <div>
-        <label>name:</label>
-        <input
-          value={name}
-          onChange={(event) => {
-            dispatch({ type: SET_NAME_ACTION, payload: event.target.value });
-          }}
+    <>
+      <h3>Review Form</h3>
+      <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+        <div>
+          <span>Text</span>
+          <input
+            type='text'
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+          />
+        </div>
+
+        <Counter
+          value={rating}
+          decrement={decrementRating}
+          increment={incrementRating}
         />
-      </div>
-      <div>
-        <label>address:</label>
-        <input
-          value={address}
-          onChange={(event) =>
-            dispatch({ type: SET_ADDRESS_ACTION, payload: event.target.value })
-          }
-        />
-      </div>
-      <div>
-        <label>text:</label>
-        <input
-          value={text}
-          onChange={(event) =>
-            dispatch({ type: SET_TEXT_ACTION, payload: event.target.value })
-          }
-        />
-      </div>
-    </form>
+
+        <Button title='Clear' onClick={clear} />
+      </form>
+    </>
   );
 };

@@ -1,17 +1,23 @@
 import classNames from "classnames";
 import styles from "./button.module.css";
 
-export const Button = ({ children, onClick, className, size, disabled }) => {
+export const Button = ({
+  title,
+  onClick,
+  disabled,
+  size = "500",
+  className,
+}) => {
   return (
     <button
       className={classNames(styles.root, className, {
-        [styles.l]: size === "l",
-        [styles.xl]: size === "xl",
+        [styles.size500]: size === "500",
+        [styles.size400]: size === "400",
       })}
-      onClick={onClick}
       disabled={disabled}
+      onClick={onClick}
     >
-      {children}s
+      {title}
     </button>
   );
 };
