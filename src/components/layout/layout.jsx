@@ -1,3 +1,5 @@
+import { Outlet } from "react-router";
+import { Cart } from "../cart/cart";
 import { Footer } from "../footer/footer";
 import { Header } from "../header/header";
 import { ProgressBar } from "../progress-bar/progress-bar";
@@ -9,7 +11,10 @@ export const Layout = ({ children }) => {
     <div className={styles.root}>
       <ProgressBar />
       <Header />
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        <Outlet />
+      </main>
+      <Cart />
       <Footer />
     </div>
   );
