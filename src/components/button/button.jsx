@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import styles from "./button.module.css";
-import { useContext } from "react";
-import { ThemeContext } from "../theme-provider";
+import { use } from "react";
+import { ThemeContext } from "../theme-context";
 
 export const Button = ({
   title,
@@ -9,21 +9,19 @@ export const Button = ({
   disabled,
   size = "500",
   className,
-  ref,
 }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = use(ThemeContext);
 
   return (
     <button
       className={classNames(styles.root, className, {
         [styles.size500]: size === "500",
         [styles.size400]: size === "400",
-        [styles.light]: theme === "light",
         [styles.dark]: theme === "dark",
+        [styles.light]: theme === "light",
       })}
       disabled={disabled}
       onClick={onClick}
-      ref={ref}
     >
       {title}
     </button>
