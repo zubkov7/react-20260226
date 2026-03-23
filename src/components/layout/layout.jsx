@@ -1,12 +1,12 @@
 import { Outlet } from "react-router";
-import { Cart } from "../cart/cart";
+import { CartContainer } from "../cart/cart-container";
 import { Footer } from "../footer/footer";
 import { Header } from "../header/header";
 import { ProgressBar } from "../progress-bar/progress-bar";
 
 import styles from "./layout.module.css";
 
-export const Layout = ({ children }) => {
+export const Layout = () => {
   return (
     <div className={styles.root}>
       <ProgressBar />
@@ -14,7 +14,7 @@ export const Layout = ({ children }) => {
       <main className={styles.main}>
         <Outlet />
       </main>
-      <Cart />
+      <CartContainer />
       <Footer />
     </div>
   );

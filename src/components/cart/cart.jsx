@@ -1,20 +1,16 @@
-import { useSelector } from "react-redux";
-import { selectCartItems } from "../../redux/entities/cart/slice";
+import { CartItemContainer } from "../cart-item/cart-item-container";
 
-export const Cart = () => {
-  const cart = useSelector(selectCartItems);
-
-  if (!cart.length) {
-    return null;
-  }
-
+export const Cart = ({ itemsIds }) => {
   return (
-    <ul>
-      {cart.map(({ id, amount }) => (
-        <li key={id}>
-          {id} - {amount}
-        </li>
-      ))}
-    </ul>
+    <div>
+      <h3>Cart</h3>
+      <ul>
+        {itemsIds.map((id) => (
+          <li key={id}>
+            <CartItemContainer id={id} />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };

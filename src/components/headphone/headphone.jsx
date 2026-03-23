@@ -1,12 +1,12 @@
-import { Codecs } from "../codecs/codecs";
 import { ReviewForm } from "../review-form/review-form";
-import { Reviews } from "../reviews/reviews";
 import { HeadphoneCounter } from "../headphone-counter/headphone-counter";
 import { use } from "react";
 import { AuthContext } from "../auth-context";
-import { useSelector } from "react-redux";
+import { Tabs } from "../tabs/tabs";
+import { TabLink } from "../tab-link/tab-link";
+import { Outlet } from "react-router";
 
-export const Headphone = ({ name, brand, reviews, codecs, id }) => {
+export const Headphone = ({ name, brand, id }) => {
   const { auth } = use(AuthContext);
   const { isAuthorized } = auth;
 
@@ -18,11 +18,16 @@ export const Headphone = ({ name, brand, reviews, codecs, id }) => {
     <section>
       <h2>{name}</h2>
       <h3>Brand - {brand}</h3>
-      {reviews.length ? <Reviews reviews={reviews} /> : <div>empty review</div>}
-      {codecs.length ? <Codecs codecs={codecs} /> : <div>empty codecs</div>}
+      <Tabs>
+        <TabLink to='reviews'>Reviews</TabLink>
+        <TabLink to='codecs'>Codecs</TabLink>
+      </Tabs>
+
+      <Outlet />
+
       {isAuthorized && (
         <>
-          <HeadphoneCounter id={id} />
+          <HeadphoneCounter headphoneId={id} />
           <ReviewForm />
         </>
       )}
