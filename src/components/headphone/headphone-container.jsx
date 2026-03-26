@@ -1,19 +1,19 @@
-import { useSelector } from "react-redux";
-import { selectHeadphoneById } from "../../redux/entities/headphones/slice";
 import { Headphone } from "./headphone";
+import { useGetHeadphonesQuery } from "../../redux/services/api/api";
 
 export const HeadphoneContainer = ({ id }) => {
-  const headphone = useSelector((state) => selectHeadphoneById(state, id));
+  const { data: headphone } = useGetHeadphonesQuery(undefined, {
+    selectFromResult: (result) => ({
+      ...result,
+      data: result?.data?.find(({ id: headphoneId }) => headphoneId === id),
+    }),
+  });
 
-  const { name, brand, reviews, codecs } = headphone || {};
+  if (!headphone) {
+    return null;
+  }
 
-  return (
-    <Headphone
-      name={name}
-      brand={brand}
-      reviewsIds={reviews}
-      codecsIds={codecs}
-      id={id}
-    />
-  );
+  const { name, brand } = headphone;
+
+  return <Headphone name={name} brand={brand} id={id} />;
 };
