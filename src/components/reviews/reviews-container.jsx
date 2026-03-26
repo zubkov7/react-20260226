@@ -22,8 +22,12 @@ export const ReviewsContainer = ({ headphoneId }) => {
     (review) => {
       addReview({ headphoneId, review: { ...review, user: auth?.id } });
     },
-    [addReview, auth?.id, headphoneId]
+    [addReview, auth?.id, headphoneId],
   );
+
+  if (!auth) {
+    return null;
+  }
 
   if (isGetReviewsFetching || isAddReviewFetching) {
     return "...loading";

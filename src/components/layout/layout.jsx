@@ -5,11 +5,15 @@ import { Header } from "../header/header";
 import { ProgressBar } from "../progress-bar/progress-bar";
 
 import styles from "./layout.module.css";
+import { Modal } from "../modal/modal";
 
 export const Layout = () => {
   return (
     <div className={styles.root}>
       <ProgressBar />
+      <Modal>
+        <div>modal</div>
+      </Modal>
       <Header />
       <main className={styles.main}>
         <Outlet />
