@@ -1,4 +1,3 @@
-import { ReviewForm } from "../review-form/review-form";
 import { HeadphoneCounter } from "../headphone-counter/headphone-counter";
 import { use } from "react";
 import { AuthContext } from "../auth-context";
@@ -25,12 +24,7 @@ export const Headphone = ({ name, brand, id }) => {
 
       <Outlet />
 
-      {isAuthorized && (
-        <>
-          <HeadphoneCounter headphoneId={id} />
-          <ReviewForm />
-        </>
-      )}
+      {isAuthorized && <HeadphoneCounter headphoneId={id} />}
     </section>
   );
 };
